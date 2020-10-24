@@ -10,6 +10,13 @@ pipeline {
                 sh './gradlew clean build'
             }
         }
+
+        stage('Deploy - Staging') {
+            steps {
+                echo 'Deploying to staging'
+            }
+        }
+
     }
 
     post {
