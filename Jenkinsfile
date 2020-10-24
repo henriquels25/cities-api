@@ -18,12 +18,12 @@ pipeline {
                 sh 'printenv'
             }
         }
+    }
 
-        post {
-            always {
-                archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
-                junit 'build/test-results/**/*.xml'
-            }
+    post {
+        always {
+            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+            junit 'build/test-results/**/*.xml'
         }
     }
 }
