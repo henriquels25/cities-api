@@ -5,9 +5,9 @@ pipeline {
         DB_ENGINE = 'sqlite'
     }
     stages {
-        stage('test') {
+        stage('build') {
             steps {
-                sh './gradlew clean test'
+                sh './gradlew clean build'
             }
         }
     }
