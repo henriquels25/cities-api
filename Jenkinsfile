@@ -12,18 +12,27 @@ pipeline {
         }
 
         stage('Deploy - Staging') {
+            when {
+                branch 'master'
+            }
             steps {
                 echo 'Deploying to staging'
             }
         }
 
         stage('Production deploy confirmation') {
+            when {
+                branch 'master'
+            }
             steps {
                 input 'Can the software be deployed in production?'
             }
         }
 
         stage('Deploy - Production') {
+            when {
+                branch 'master'
+            }
             steps {
                 echo 'Deploying to production'
             }
