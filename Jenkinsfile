@@ -17,6 +17,18 @@ pipeline {
             }
         }
 
+        stage('Production deploy confirmation') {
+            steps {
+                input 'Can the software be deployed in production?'
+            }
+        }
+
+        stage('Deploy - Production') {
+            steps {
+                echo 'Deploying to production'
+            }
+        }
+
     }
 
     post {
