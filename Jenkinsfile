@@ -5,17 +5,15 @@ pipeline {
     }
     stages {
         stage('Build + Code Quality') {
-            parallel {
-                stage('build') {
-                    steps {
-                        echo 'building'
-                    }
+            stage('test') {
+                steps {
+                    echo 'gradle clean test'
                 }
+            }
 
-                stage('sonar') {
-                    steps {
-                        sh 'gradle sonarqube'
-                    }
+            stage('sonar') {
+                steps {
+                    sh 'gradle sonarqube -x test'
                 }
             }
         }
