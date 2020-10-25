@@ -4,17 +4,15 @@ pipeline {
         SONAR_TOKEN = credentials('sonarcloud-token')
     }
     stages {
-        stage('Build + Code Quality') {
-            stage('test') {
-                steps {
-                    echo 'gradle clean test'
-                }
+        stage('test') {
+            steps {
+                echo 'gradle clean test'
             }
+        }
 
-            stage('sonar') {
-                steps {
-                    sh 'gradle sonarqube -x test'
-                }
+        stage('sonar') {
+            steps {
+                sh 'gradle sonarqube -x test'
             }
         }
 
