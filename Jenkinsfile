@@ -18,7 +18,7 @@ pipeline {
 
         stage('Production deploy confirmation') {
             when {
-                branch 'main'
+                buildingTag()
             }
             steps {
                 input 'Can the software be deployed in production?'
@@ -27,7 +27,7 @@ pipeline {
 
         stage('Deploy - Production') {
             when {
-                branch 'master'
+                buildingTag()
             }
             steps {
                 echo 'Deploying to production'
