@@ -14,7 +14,7 @@ pipeline {
 
                 stage('sonar') {
                     steps {
-                        echo "SONAR_TOKEN222 is ${SONAR_TOKEN22}"
+                        sh './gradlew sonarqube'
                     }
                 }
             }
