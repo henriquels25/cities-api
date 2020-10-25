@@ -1,5 +1,5 @@
 pipeline {
-    agent { docker { image 'openjdk:11-jdk-slim' } }
+    agent { docker { image 'gradle:6.6.1-jdk11-hotspot' } }
     environment {
         SONAR_TOKEN = credentials('sonarcloud-token')
     }
@@ -14,7 +14,7 @@ pipeline {
 
                 stage('sonar') {
                     steps {
-                        sh './gradlew sonarqube'
+                        sh 'gradle sonarqube'
                     }
                 }
             }
