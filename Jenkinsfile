@@ -14,7 +14,7 @@ pipeline {
 
                 stage('sonar') {
                     steps {
-                        echo "SONAR_TOKEN is ${SONAR_TOKEN}"
+                        echo "SONAR_TOKEN222 is ${SONAR_TOKEN22}"
                     }
                 }
             }
