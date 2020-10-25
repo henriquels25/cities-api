@@ -1,7 +1,10 @@
 pipeline {
     agent { docker { image 'openjdk:11-jdk-slim' } }
+    environment {
+        SONAR_TOKEN = credentials('sonarcloud-token')
+    }
     stages {
-        stage('In Parallel') {
+        stage('Build + Code Quality') {
             parallel {
                 stage('build') {
                     steps {
@@ -9,9 +12,9 @@ pipeline {
                     }
                 }
 
-                stage('code quality') {
+                stage('sonar') {
                     steps {
-                        echo 'running sonar integration'
+                        sh './gradlew sonarqube'
                     }
                 }
             }
