@@ -1,9 +1,19 @@
 pipeline {
     agent { docker { image 'openjdk:11-jdk-slim' } }
     stages {
-        stage('build') {
-            steps {
-                sh './gradlew clean build'
+        stage('In Parallel') {
+            parallel {
+                stage('build') {
+                    steps {
+                        sh './gradlew clean build'
+                    }
+                }
+
+                stage('code quality') {
+                    steps {
+                        echo 'running sonar integration'
+                    }
+                }
             }
         }
 
