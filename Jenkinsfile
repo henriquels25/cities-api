@@ -8,7 +8,7 @@ pipeline {
             parallel {
                 stage('build') {
                     steps {
-                        sh './gradlew clean build'
+                        echo 'building'
                     }
                 }
 
