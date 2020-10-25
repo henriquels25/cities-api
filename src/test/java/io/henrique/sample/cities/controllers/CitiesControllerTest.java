@@ -28,7 +28,7 @@ class CitiesControllerTest {
                 .exchange().expectStatus().isOk()
                 .expectBody()
                 .jsonPath("[0].name").isEqualTo("Porto Alegre")
-                .jsonPath("[1].name").isEqualTo("Sao Paulo");
+                .jsonPath("[1].name").isEqualTo("São Paulo");
     }
 
 }
