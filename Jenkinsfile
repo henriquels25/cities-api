@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('test') {
             steps {
-                echo 'gradle clean test'
+                sh 'gradle clean test'
             }
         }
 
