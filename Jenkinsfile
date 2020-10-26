@@ -9,7 +9,7 @@ pipeline {
                 sh 'gradle clean build -x test'
             }
         }
-        
+
         stage('test') {
             steps {
                 sh 'gradle test'
@@ -18,7 +18,7 @@ pipeline {
 
         stage('sonar') {
             steps {
-                sh 'gradle sonarqube -x test'
+                sh 'gradle sonarqube -x test -Dsonar.branch.name=${BRANCH_NAME}'
             }
         }
 
