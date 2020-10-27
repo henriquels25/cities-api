@@ -33,22 +33,52 @@ dependencies {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
-}
 
-jacocoTestReport {
-    dependsOn test
-}
-
-jacocoTestReport {
-    reports {
-        xml.enabled true
+    testLogging {
+        events "passed", "skipped", "failed"
     }
 }
+
+//jacocoTestReport {
+//    dependsOn test
+//}
+
+//jacocoTestReport {
+//    reports {
+//        xml.enabled true
+//    }
+//}
 
 sonarqube {
     properties {
         property "sonar.projectKey", "henriquels25_cities-api"
         property "sonar.organization", "henriquels"
         property "sonar.host.url", "https://sonarcloud.io"
+    }
+}
+
+task unitTest(type: Test) {
+    useJUnitPlatform {
+        excludeTags 'integrationTest', 'E2ETest'
+    }
+}
+
+task integrationTest(type: Test) {
+    useJUnitPlatform {
+        includeTags 'integrationTest'
+    }
+}
+
+task e2eTest(type: Test) {
+    useJUnitPlatform {
+        includeTags 'E2ETest'
+    }
+}
+
+jacocoTestReport {
+    sourceSets sourceSets.main
+    getExecutionData().setFrom(fileTree(buildDir).include("/jacoco/*.exec"))
+    reports {
+        xml.enabled true
     }
 }

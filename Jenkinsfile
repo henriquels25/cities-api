@@ -10,15 +10,21 @@ pipeline {
             }
         }
 
-        stage('test') {
+        stage('unit test') {
             steps {
-                sh 'gradle test'
+                sh 'gradle unitTest'
+            }
+        }
+
+        stage('integration test') {
+            steps {
+                sh 'gradle integrationTest'
             }
         }
 
         stage('sonar') {
             steps {
-                sh 'gradle sonarqube -x test -Dsonar.branch.name=${BRANCH_NAME}'
+                sh 'gradle jacocoTestReport sonarqube -x test -Dsonar.branch.name=${BRANCH_NAME}'
             }
         }
 
