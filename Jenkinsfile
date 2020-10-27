@@ -1,5 +1,10 @@
 pipeline {
-    agent { docker { image 'gradle:6.6.1-jdk11-hotspot' } }
+    agent {
+        docker {
+            image 'gradle:6.6.1-jdk11-hotspot'
+            args '-v $HOME/.gradle:/root/.gradle'
+        }
+    }
     environment {
         SONAR_TOKEN = credentials('sonarcloud-token')
     }
@@ -9,6 +14,7 @@ pipeline {
                 sh 'gradle clean build -x test'
             }
         }
+
 
         stage('unit test') {
             steps {
@@ -25,6 +31,12 @@ pipeline {
         stage('sonar') {
             steps {
                 sh 'gradle jacocoTestReport sonarqube -x test -Dsonar.branch.name=${BRANCH_NAME}'
+            }
+        }
+
+        stage('e2e test') {
+            steps {
+                sh 'gradle e2eTest'
             }
         }
 
