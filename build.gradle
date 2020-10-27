@@ -52,3 +52,21 @@ sonarqube {
         property "sonar.host.url", "https://sonarcloud.io"
     }
 }
+
+task unitTest(type: Test) {
+    useJUnitPlatform {
+        excludeTags 'integrationTest', 'E2ETest'
+    }
+}
+
+task integrationTest(type: Test) {
+    useJUnitPlatform {
+        includeTags 'integrationTest'
+    }
+}
+
+task e2eTest(type: Test) {
+    useJUnitPlatform {
+        includeTags 'E2ETest'
+    }
+}

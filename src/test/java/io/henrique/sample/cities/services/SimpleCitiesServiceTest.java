@@ -13,6 +13,7 @@ class SimpleCitiesServiceTest {
         StepVerifier.create(service.getCities())
                 .expectNext(new CityDTO("Porto Alegre"))
                 .expectNext(new CityDTO("São Paulo"))
-                .expectComplete();
+                .expectComplete()
+                .verify();
     }
 }

@@ -10,9 +10,15 @@ pipeline {
             }
         }
 
-        stage('test') {
+        stage('unit test') {
             steps {
-                sh 'gradle test'
+                sh 'gradle unitTest'
+            }
+        }
+
+        stage('integration test') {
+            steps {
+                sh 'gradle integrationTest'
             }
         }
 

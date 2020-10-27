@@ -8,6 +8,6 @@ import reactor.core.publisher.Flux;
 public class SimpleCitiesService implements CitiesService {
     @Override
     public Flux<CityDTO> getCities() {
-        return Flux.just(new CityDTO("Porto Alegre"), new CityDTO("Sao Paulo"));
+        return Flux.just(new CityDTO("Porto Alegre"), new CityDTO("São Paulo"));
     }
 }
