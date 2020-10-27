@@ -15,19 +15,16 @@ pipeline {
             }
         }
 
-        stage('fast-tests') {
-            parallel {
-                stage('unit test') {
-                    steps {
-                        sh 'gradle unitTest'
-                    }
-                }
 
-                stage('integration test') {
-                    steps {
-                        sh 'gradle integrationTest'
-                    }
-                }
+        stage('unit test') {
+            steps {
+                sh 'gradle unitTest'
+            }
+        }
+
+        stage('integration test') {
+            steps {
+                sh 'gradle integrationTest'
             }
         }
 
