@@ -33,17 +33,21 @@ dependencies {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
-}
 
-jacocoTestReport {
-    dependsOn test
-}
-
-jacocoTestReport {
-    reports {
-        xml.enabled true
+    testLogging {
+        events "passed", "skipped", "failed"
     }
 }
+
+//jacocoTestReport {
+//    dependsOn test
+//}
+
+//jacocoTestReport {
+//    reports {
+//        xml.enabled true
+//    }
+//}
 
 sonarqube {
     properties {
@@ -68,5 +72,13 @@ task integrationTest(type: Test) {
 task e2eTest(type: Test) {
     useJUnitPlatform {
         includeTags 'E2ETest'
+    }
+}
+
+jacocoTestReport {
+    sourceSets sourceSets.main
+    getExecutionData().setFrom(fileTree(buildDir).include("/jacoco/*.exec"))
+    reports {
+        xml.enabled true
     }
 }

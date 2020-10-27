@@ -24,7 +24,7 @@ pipeline {
 
         stage('sonar') {
             steps {
-                sh 'gradle sonarqube -x test -Dsonar.branch.name=${BRANCH_NAME}'
+                sh 'gradle jacocoTestReport sonarqube -x test -Dsonar.branch.name=${BRANCH_NAME}'
             }
         }
 
