@@ -69,7 +69,7 @@ pipeline {
                 buildingTag()
             }
             steps {
-                deployToProduction 'cities-api', '${TAG_NAME}'
+                deployToProduction 'cities-api', env.TAG_NAME
             }
         }
 
