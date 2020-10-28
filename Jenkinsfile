@@ -13,18 +13,18 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                script {
-                    deployToStaging 'cities-api' 'latest'
-                }
+                //script {
+                deployToStaging 'cities-api' 'latest'
+                //}
                 //sh 'gradle clean build -x test'
             }
         }
 
         stage('unit test') {
             steps {
-                script {
-                    deployToProduction 'cities-api' '0.7.0'
-                }
+                //script {
+                deployToProduction 'cities-api' '0.7.0'
+                //}
                 //sh 'gradle unitTest'
             }
         }
