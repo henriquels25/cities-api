@@ -71,7 +71,9 @@ pipeline {
                 buildingTag()
             }
             steps {
-                deployScripts.deployToProduction("cities-api", "0.0.1")
+                script {
+                    deployScripts.deployToProduction("cities-api", "0.0.1")
+                }
             }
         }
 
