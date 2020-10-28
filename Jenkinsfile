@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                echo 'build'
+                deployToProduction 'cities-api', $BRANCH_NAME
                 //sh 'gradle clean build -x test'
             }
         }
@@ -69,7 +69,7 @@ pipeline {
                 buildingTag()
             }
             steps {
-                deployToProduction 'cities-api', '${TAG_NAME}'
+                deployToProduction 'cities-api', $TAG_NAME
             }
         }
 
