@@ -13,18 +13,14 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                //script {
-                deployToStaging 'cities-api', 'latest'
-                //}
+                echo 'build'
                 //sh 'gradle clean build -x test'
             }
         }
 
         stage('unit test') {
             steps {
-                //script {
-                deployToProduction 'cities-api', '0.7.0'
-                //}
+                echo 'unit test'
                 //sh 'gradle unitTest'
             }
         }
@@ -55,9 +51,7 @@ pipeline {
                 branch 'main'
             }
             steps {
-                script {
-                    log.info 'Deploying to staging latest version'
-                }
+                deployToStaging 'cities-api', 'latest'
             }
         }
 
@@ -75,9 +69,7 @@ pipeline {
                 buildingTag()
             }
             steps {
-                script {
-                    log.warning 'Deploying to production version ${TAG_NAME}'
-                }
+                deployToProduction 'cities-api', '${TAG_NAME}'
             }
         }
 
