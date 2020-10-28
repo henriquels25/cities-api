@@ -1,4 +1,4 @@
-def deployScripts;
+@Library('jenkins-shared-library') _
 
 pipeline {
     agent {
@@ -11,13 +11,6 @@ pipeline {
         SONAR_TOKEN = credentials('sonarcloud-token')
     }
     stages {
-        stage('prepare') {
-            steps {
-                script {
-                    deployScripts = load("deploy_scripts.groovy")
-                }
-            }
-        }
         stage('build') {
             steps {
                 echo 'build'
@@ -58,9 +51,7 @@ pipeline {
                 branch 'main'
             }
             steps {
-                script {
-                    deployScripts.deployToStaging("cities-api", "latest")
-                }
+                deployToStaging 'cities-api', 'latest'
             }
         }
 
@@ -78,9 +69,7 @@ pipeline {
                 buildingTag()
             }
             steps {
-                script {
-                    deployScripts.deployToProduction("cities-api", "${TAG_NAME}")
-                }
+                deployToProduction 'cities-api', '${TAG_NAME}'
             }
         }
 
