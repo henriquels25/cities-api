@@ -1,3 +1,5 @@
+def deployScripts = load("deploy_scripts.groovy")
+
 pipeline {
     agent {
         docker {
@@ -12,12 +14,11 @@ pipeline {
         stage('test script') {
             steps {
                 script {
-                    def deployScripts = load("deploy_scripts.groovy")
                     deployScripts.deployToStaging("cities-api", "0.0.1")
                 }
             }
         }
-        
+
         stage('build') {
             steps {
                 sh 'gradle clean build -x test'
