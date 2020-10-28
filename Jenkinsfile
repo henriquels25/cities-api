@@ -37,8 +37,7 @@ pipeline {
 
         stage('e2e test') {
             steps {
-                echo 'e2eTest'
-                //sh 'gradle e2eTest'
+                sh 'gradle e2eTest'
             }
         }
 
