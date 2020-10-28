@@ -11,6 +11,13 @@ pipeline {
         SONAR_TOKEN = credentials('sonarcloud-token')
     }
     stages {
+        stage('prepare') {
+            steps {
+                script {
+                    deployScripts = load("deploy_scripts.groovy")
+                }
+            }
+        }
         stage('build') {
             steps {
                 echo 'build'
@@ -52,8 +59,7 @@ pipeline {
             }
             steps {
                 script {
-                    deployScripts = load("deploy_scripts.groovy")
-                    deployScripts.deployToStaging("cities-api", "0.0.1")
+                    deployScripts.deployToStaging("cities-api", "latest")
                 }
             }
         }
@@ -73,7 +79,7 @@ pipeline {
             }
             steps {
                 script {
-                    deployScripts.deployToProduction("cities-api", "0.0.1")
+                    deployScripts.deployToProduction("cities-api", "${TAG_NAME}")
                 }
             }
         }
