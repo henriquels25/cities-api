@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                deployToProduction 'cities-api', $BRANCH_NAME
+                deployToProduction 'cities-api', '$BRANCH_NAME'
                 //sh 'gradle clean build -x test'
             }
         }
