@@ -14,7 +14,7 @@ pipeline {
         stage('build') {
             steps {
                 //script {
-                sayHello 'Joe'
+                deployToStaging 'cities-api', 'latest'
                 //}
                 //sh 'gradle clean build -x test'
             }
@@ -23,7 +23,7 @@ pipeline {
         stage('unit test') {
             steps {
                 //script {
-                sayHello()
+                deployToProduction 'cities-api', '0.7.0'
                 //}
                 //sh 'gradle unitTest'
             }
