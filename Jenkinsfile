@@ -1,4 +1,4 @@
-def deployScripts = load("deploy_scripts.groovy")
+def deployScripts;
 
 pipeline {
     agent {
@@ -11,23 +11,17 @@ pipeline {
         SONAR_TOKEN = credentials('sonarcloud-token')
     }
     stages {
-        stage('test script') {
-            steps {
-                script {
-                    deployScripts.deployToStaging("cities-api", "0.0.1")
-                }
-            }
-        }
-
         stage('build') {
             steps {
-                sh 'gradle clean build -x test'
+                echo 'build'
+                //sh 'gradle clean build -x test'
             }
         }
 
         stage('unit test') {
             steps {
-                sh 'gradle unitTest'
+                echo 'unit test'
+                //sh 'gradle unitTest'
             }
         }
 
@@ -39,13 +33,15 @@ pipeline {
 
         stage('sonar') {
             steps {
-                sh 'gradle jacocoTestReport sonarqube -x test -Dsonar.branch.name=${BRANCH_NAME}'
+                echo 'sonar'
+                //sh 'gradle jacocoTestReport sonarqube -x test -Dsonar.branch.name=${BRANCH_NAME}'
             }
         }
 
         stage('e2e test') {
             steps {
-                sh 'gradle e2eTest'
+                echo 'e2eTest'
+                //sh 'gradle e2eTest'
             }
         }
 
@@ -55,6 +51,7 @@ pipeline {
             }
             steps {
                 script {
+                    deployScripts = load("deploy_scripts.groovy")
                     deployScripts.deployToStaging("cities-api", "0.0.1")
                 }
             }
@@ -74,7 +71,7 @@ pipeline {
                 buildingTag()
             }
             steps {
-                echo 'Deploying to production'
+                deployScripts.deployToProduction("cities-api", "0.0.1")
             }
         }
 
