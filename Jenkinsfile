@@ -15,7 +15,6 @@ pipeline {
             }
         }
 
-
         stage('unit test') {
             steps {
                 sh 'gradle unitTest'
@@ -45,7 +44,10 @@ pipeline {
                 branch 'main'
             }
             steps {
-                echo 'Deploying to staging'
+                script {
+                    def deployScripts = load("deploy_scripts.groovy")
+                    deployScripts.deployToStaging("cities-api", "0.0.1")
+                }
             }
         }
 
