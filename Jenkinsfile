@@ -13,36 +13,31 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                echo 'build'
-                //sh 'gradle clean build -x test'
+                sh 'gradle clean build -x test'
             }
         }
 
         stage('unit test') {
             steps {
-                echo 'unit test'
-                //sh 'gradle unitTest'
+                sh 'gradle unitTest'
             }
         }
 
         stage('integration test') {
             steps {
-                echo 'integration test'
-                //sh 'gradle integrationTest'
+                sh 'gradle integrationTest'
             }
         }
 
         stage('sonar') {
             steps {
-                echo 'sonar'
-                //sh 'gradle jacocoTestReport sonarqube -x test -Dsonar.branch.name=${BRANCH_NAME}'
+                sh 'gradle jacocoTestReport sonarqube -x test -Dsonar.branch.name=${BRANCH_NAME}'
             }
         }
 
         stage('e2e test') {
             steps {
-                echo 'e2eTest'
-                //sh 'gradle e2eTest'
+                sh 'gradle e2eTest'
             }
         }
 
@@ -75,10 +70,10 @@ pipeline {
 
     }
 
-//    post {
-//        always {
-//            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
-//            junit 'build/test-results/**/*.xml'
-//        }
-//    }
+    post {
+        always {
+            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+            junit 'build/test-results/**/*.xml'
+        }
+    }
 }
