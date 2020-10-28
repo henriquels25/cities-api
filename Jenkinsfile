@@ -55,7 +55,6 @@ pipeline {
             }
             steps {
                 script {
-                    def deployScripts = load("deploy_scripts.groovy")
                     deployScripts.deployToStaging("cities-api", "0.0.1")
                 }
             }
