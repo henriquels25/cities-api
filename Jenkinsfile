@@ -9,6 +9,15 @@ pipeline {
         SONAR_TOKEN = credentials('sonarcloud-token')
     }
     stages {
+        stage('test script') {
+            steps {
+                script {
+                    def deployScripts = load("deploy_scripts.groovy")
+                    deployScripts.deployToStaging("cities-api", "0.0.1")
+                }
+            }
+        }
+        
         stage('build') {
             steps {
                 sh 'gradle clean build -x test'
