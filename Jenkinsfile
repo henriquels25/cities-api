@@ -13,14 +13,18 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                log.info 'build'
+                script {
+                    log.info 'build'
+                }
                 //sh 'gradle clean build -x test'
             }
         }
 
         stage('unit test') {
             steps {
-                log.warning 'unit test'
+                script {
+                    log.warning 'unit test'
+                }
                 //sh 'gradle unitTest'
             }
         }
