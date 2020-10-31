@@ -30,6 +30,11 @@ pipeline {
         }
 
         stage('sonar') {
+            when {
+                not {
+                    buildingTag()
+                }
+            }
             steps {
                 sh 'gradle jacocoTestReport sonarqube -x test -Dsonar.branch.name=${BRANCH_NAME}'
             }
